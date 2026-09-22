@@ -11,13 +11,13 @@ import StatCard from '../components/StatCard'
 import TicketRow from '../components/TicketRow'
 import DashboardSidebar from '../components/DashboardSidebar'
 import { useEffect, useMemo, useState } from 'react'
-import type { Ticket } from '../lib/api'
+import type { TicketSummary } from '../lib/api'
 import { getTickets } from '../lib/api'
 import { Link } from 'react-router-dom'
 
 
 export default function Dashboard() {
-    const [tickets, setTickets] = useState<Ticket[]>([])
+    const [tickets, setTickets] = useState<TicketSummary[]>([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
     useEffect(() => {
