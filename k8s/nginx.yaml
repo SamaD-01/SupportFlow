@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  labels:
+    app: supportflow-nginx
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: supportflow-nginx
+  template:
+    metadata:
+      labels:
+        app: supportflow-nginx
+    spec:
+      containers:
+        - name: nginx
+          image: ghcr.io/samad-01/supportflow-nginx:latest
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits:
+              cpu: "200m"
+              memory: "128Mi"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: supportflow-nginx
+spec:
+  selector:
+    app: supportflow-nginx
+  ports:
+    - port: 80
+      targetPort: 80
+  type: ClusterIP

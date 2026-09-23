@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: supportflow-config
+data:
+  APP_ENV: "prod"
+
+---
+# ATTENTION : à ne jamais committer avec de vraies valeurs en clair.
+# En vrai projet, on utiliserait des secrets K8s créés via kubectl (pas dans git),
+# ou un outil comme Sealed Secrets / Vault. Ici c'est un exemple pour la démo.
+apiVersion: v1
+kind: Secret
+metadata:
+  name: supportflow-secret
+type: Opaque
+stringData:
+  DATABASE_URL: "postgresql://supportflow:supportflow@postgres:5432/supportflow?serverVersion=17&charset=utf8"
